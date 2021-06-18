@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Answer::class);
     }
 
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
+
     public function assignRole($role)
     {
         if (is_string($role)) {

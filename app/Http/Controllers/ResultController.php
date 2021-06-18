@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Relust;
+use App\Models\Quiz;
+use App\Models\Result;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class RelustController extends Controller
+class ResultController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,9 @@ class RelustController extends Controller
      */
     public function index()
     {
-        //
+        $quizzes = Quiz::all();
+
+        return view('admin.results.index', compact('quizzes'));
     }
 
     /**
@@ -41,21 +45,25 @@ class RelustController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Relust  $relust
+     * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function show(Relust $relust)
+    public function show(Result $result, Quiz $quiz)
     {
-        //
+        $results = $quiz->results;
+
+        $users = User::all();
+
+        return view('admin.results.show', compact('results', 'users', 'quiz'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Relust  $relust
+     * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function edit(Relust $relust)
+    public function edit(Result $result)
     {
         //
     }
@@ -64,10 +72,10 @@ class RelustController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Relust  $relust
+     * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Relust $relust)
+    public function update(Request $request, Result $result)
     {
         //
     }
@@ -75,10 +83,10 @@ class RelustController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Relust  $relust
+     * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Relust $relust)
+    public function destroy(Result $result)
     {
         //
     }

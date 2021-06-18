@@ -8,8 +8,11 @@
                     <div class="card-header">
                         {{ $quiz->name }}
 
+
                         <div class="float-right">
-                            time
+                            <span
+                                id="time">{{ (strtotime($quiz->end_time) - strtotime(date('Y-m-d H:i:s'))) / 60 }}</span>
+                            minutes left
                         </div>
                     </div>
 
@@ -40,3 +43,33 @@
         </div>
     </div>
 @endsection
+
+<script>
+    function startTimer(duration, display) {
+        var timer = duration,
+            minutes, seconds;
+        setInterval(function() {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = duration;
+            }
+        }, 1000);
+    }
+
+    window.onload = function() {
+
+        var time = document.getElementById('time').innerHTML;
+
+        var fiveMinutes = 60 * time,
+            display = document.querySelector('#time');
+        startTimer(fiveMinutes, display);
+    };
+
+</script>

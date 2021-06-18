@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Relust;
+use App\Models\Result;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RelustFactory extends Factory
+class ResultFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Relust::class;
+    protected $model = Result::class;
 
     /**
      * Define the model's default state.

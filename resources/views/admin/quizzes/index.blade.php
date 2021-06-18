@@ -20,6 +20,10 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Name</th>
+                                        <th>Sart</th>
+                                        <th>End</th>
+                                        <th>Duration</th>
+                                        <th>Question</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -33,6 +37,10 @@
                                                     {{ $quiz->name }}
                                                 </a>
                                             </td>
+                                            <td>{{ $quiz->start_time->format('Y-m-d h:i A') }}</td>
+                                            <td>{{ $quiz->end_time->format('Y-m-d h:i A') }}</td>
+                                            <td>{{ $quiz->total_time }} minutes</td>
+                                            <td>{{ $quiz->no_of_question }}</td>
 
                                             <td>
                                                 <form method="post"
