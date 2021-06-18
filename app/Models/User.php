@@ -46,6 +46,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class)->withTimestamps();
     }
 
+    public function answers()
+    {
+        return $this->belongsToMany(Answer::class);
+    }
+
     public function assignRole($role)
     {
         if (is_string($role)) {
