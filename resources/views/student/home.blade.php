@@ -12,6 +12,10 @@
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
+                        @elseif(session('quiz-missed'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('quiz-missed') }}
+                            </div>
                         @endif
 
                         <table class="table table-striped">
@@ -37,10 +41,17 @@
                                         <td>{{ $quiz->total_time }} minutes</td>
                                         <td>{{ $quiz->no_of_question }}</td>
                                         <td>
-                                            <a class="btn btn-primary"
-                                                href="{{ route('student.quiz', ['quiz' => $quiz->id]) }}">
-                                                Start Now
-                                            </a>
+                                            @if (!App\Models\Result::where('quiz_id', $quiz->id)->exists())
+                                                <a class="btn btn-primary"
+                                                    href="{{ route('student.quiz', ['quiz' => $quiz->id]) }}">
+                                                    Start Now
+                                                </a>
+                                            @else
+                                                <a class="btn btn-success"
+                                                    href="{{ route('student.result', ['quiz' => $quiz->id, 'user' => Auth::user()->id]) }}">
+                                                    Get Result
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

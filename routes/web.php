@@ -28,6 +28,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home/quizzes/{quiz}', [HomeController::class, 'show'])->name('student.quiz');
 Route::post('/home/user/answers', [HomeController::class, 'answers'])->name('student.answers');
+Route::get('/home/users/{user}/quizzes/{quiz}/results', [HomeController::class, 'result'])->name('student.result');
 
 //admin routes
 Route::middleware('can:admin')->prefix('admin')->group(function () {

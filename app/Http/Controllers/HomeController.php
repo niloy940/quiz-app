@@ -46,6 +46,8 @@ class HomeController extends Controller
         if (strtotime($quiz->end_time) > strtotime(date('Y-m-d H:i:s'))) {
             return view('student.quizzes.show', compact('quiz'));
         } else {
+            session()->flash('quiz-missed', 'You have missed the quiz!');
+            
             return back();
         }
     }
@@ -98,5 +100,12 @@ class HomeController extends Controller
         ]);
 
         return redirect(route('home'));
+    }
+
+    public function result(User $user, Quiz $quiz)
+    {
+        $result = Result::where('quiz_id', $quiz->id)->where('user_id', $user->id)->first();
+
+        return view('student.result', compact('result'));
     }
 }
