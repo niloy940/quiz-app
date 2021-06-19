@@ -43,15 +43,22 @@
                                             <td>{{ $quiz->no_of_question }}</td>
 
                                             <td>
-                                                <form method="post"
-                                                    action="{{ route('quizzes.destroy', ['quiz' => $quiz->id]) }}">
-                                                    @csrf
-                                                    @method('delete')
+                                                <div class="row">
+                                                    <a class="btn btn-dark mr-2"
+                                                        href="{{ route('quizzes.edit', ['quiz' => $quiz->id]) }}">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
 
-                                                    <button type="submit" class="btn btn-danger">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
+                                                    <form method="post"
+                                                        action="{{ route('quizzes.destroy', ['quiz' => $quiz->id]) }}">
+                                                        @csrf
+                                                        @method('delete')
+
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

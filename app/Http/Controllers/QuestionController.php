@@ -64,9 +64,9 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit(Question $question)
+    public function edit(Quiz $quiz, Question $question)
     {
-        //
+        return view('admin.questions.edit', compact('quiz', 'question'));
     }
 
     /**
@@ -76,9 +76,13 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(Request $request, Quiz $quiz, Question $question)
     {
-        //
+        $question->update([
+            'question' => $request->question
+        ]);
+
+        return redirect(route('quizzes.show', ['quiz' => $quiz->id]));
     }
 
     /**

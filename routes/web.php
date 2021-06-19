@@ -40,6 +40,8 @@ Route::middleware('can:admin')->prefix('admin')->group(function () {
     Route::get('/quizzes/{quiz}/questions', [QuestionController::class, 'create'])->name('questions.create');
     Route::post('/quizzes/{quiz}/questions', [QuestionController::class, 'store'])->name('questions.store');
     Route::get('/quizzes/{quiz}/questions/{question}', [QuestionController::class, 'show'])->name('questions.show');
+    Route::get('/quizzes/{quiz}/questions/{question}/edit', [QuestionController::class, 'edit'])->name('questions.edit');
+    Route::patch('/quizzes/{quiz}/questions/{question}', [QuestionController::class, 'update'])->name('questions.update');
     Route::post('/quizzes/{quiz}/questions/{question}', [QuestionController::class, 'destroy'])->name('questions.destroy');
 
     Route::get('quizzes/{quiz}/questions/{question}/answers', [AnswerController::class, 'create'])->name('answers.create');
