@@ -102,7 +102,7 @@ class HomeController extends Controller
             echo 'Time Up!';
             return;
         }
-
+        
         Result::create([
             'quiz_id' => $quiz_id,
             'user_id' => $user->id,

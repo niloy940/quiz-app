@@ -16,6 +16,12 @@
                     </div>
 
                     <div class="card-body">
+                        @if (session('one-ans'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('one-ans') }}
+                            </div>
+                        @endif
+
                         <form method="post" action="{{ route('student.answers') }}">
                             @csrf
 
@@ -25,7 +31,7 @@
                                 @foreach ($question->answers as $answer)
                                     <div class="form-check">
                                         <input class="form-check-input" name="answers[]" type="checkbox"
-                                            value="{{ $answer->id }}" id="flexCheckDefault">
+                                            value="{{ $answer->id }}" id="{{ $question->id }}">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             {{ $answer->answer }}
                                         </label>
