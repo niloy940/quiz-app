@@ -46,7 +46,7 @@ class HomeController extends Controller
         if (strtotime($quiz->end_time) > strtotime(date('Y-m-d H:i:s'))) {
             return view('student.quizzes.show', compact('quiz'));
         } else {
-            session()->flash('quiz-missed', 'You have missed the quiz!');
+            session()->flash('time-over', 'Time is over!');
             
             return back();
         }

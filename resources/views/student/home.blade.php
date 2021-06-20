@@ -12,9 +12,9 @@
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
-                        @elseif(session('quiz-missed'))
+                        @elseif(session('time-over'))
                             <div class="alert alert-success" role="alert">
-                                {{ session('quiz-missed') }}
+                                {{ session('time-over') }}
                             </div>
                         @endif
 
