@@ -12,6 +12,10 @@
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
+                        @elseif(session('not-started'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('not-started') }}
+                            </div>
                         @elseif(session('time-over'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('time-over') }}

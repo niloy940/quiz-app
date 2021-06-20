@@ -10,8 +10,7 @@
 
 
                         <div class="float-right">
-                            <span
-                                id="time">{{ (strtotime($quiz->end_time) - strtotime(date('Y-m-d H:i:s'))) / 60 }}</span>
+                            <span id="time">{{ $time_left }}</span>
                             minutes left
                         </div>
                     </div>
@@ -58,7 +57,7 @@
             display.textContent = minutes + ":" + seconds;
 
             if (--timer < 0) {
-                timer = duration;
+                timer = 0;
             }
         }, 1000);
     }
@@ -67,9 +66,9 @@
 
         var time = document.getElementById('time').innerHTML;
 
-        var fiveMinutes = 60 * time,
+        var duration = 60 * time,
             display = document.querySelector('#time');
-        startTimer(fiveMinutes, display);
+        startTimer(duration, display);
     };
 
 </script>

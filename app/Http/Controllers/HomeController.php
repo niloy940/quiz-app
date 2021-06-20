@@ -43,11 +43,18 @@ class HomeController extends Controller
      */
     public function show(Quiz $quiz)
     {
-        if (strtotime($quiz->end_time) > strtotime(date('Y-m-d H:i:s'))) {
-            return view('student.quizzes.show', compact('quiz'));
+        $current_time = strtotime(date('Y-m-d H:i:s'));
+        $start_time = strtotime($quiz->start_time);
+        $end_time = strtotime($quiz->end_time);
+        $time_left = ($end_time - $current_time) / 60;
+
+        if (($current_time >= $start_time) && ($end_time > $current_time)) {
+            return view('student.quizzes.show', compact('quiz', 'time_left'));
+        } elseif ($current_time < $start_time) {
+            session()->flash('not-started', 'Quiz is not started yet!');
+            return back();
         } else {
             session()->flash('time-over', 'Time is over!');
-            
             return back();
         }
     }
@@ -58,28 +65,33 @@ class HomeController extends Controller
         $no_correct = 0;
         $no_incorrect = 0;
 
-        foreach ($request->answers as  $answer_id) {
-            $answer = Answer::where('id', $answer_id)->first();
+        if ($request->answers) {
+            foreach ($request->answers as  $answer_id) {
+                $answer = Answer::where('id', $answer_id)->first();
 
-            $question = $answer->question;
+                $question = $answer->question;
 
-            // $pivot_table =  DB::table('answer_user')->where('question_id', 1)->first();
+                // $pivot_table =  DB::table('answer_user')->where('question_id', 1)->first();
 
-            // if ($pivot_table->question_id =! $question->id) {
-            //     $user->answers()->attach($answer->id, ['question_id' => $question->id]);
-            // } else {
-            //     return redirect(route('home'));
-            // }
+                // if ($pivot_table->question_id =! $question->id) {
+                //     $user->answers()->attach($answer->id, ['question_id' => $question->id]);
+                // } else {
+                //     return redirect(route('home'));
+                // }
 
-            $correct_answer = $question->answers->where('is_correct', true)->first();
+                $correct_answer = $question->answers->where('is_correct', true)->first();
             
-            if ($answer->id == $correct_answer->id) {
-                $no_correct++;
-            }
+                if ($answer->id == $correct_answer->id) {
+                    $no_correct++;
+                }
 
-            if ($answer->id != $correct_answer->id) {
-                $no_incorrect++;
+                if ($answer->id != $correct_answer->id) {
+                    $no_incorrect++;
+                }
             }
+        } else {
+            session()->flash('select-answer', 'You must have to select answer before submit!');
+            return back();
         }
 
         $ans_id = array_values($request->answers)[0];
