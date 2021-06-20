@@ -13,6 +13,11 @@
                                 class="btn btn-success float-right">
                                 Add Answer
                             </a>
+
+                            <a href="{{ route('quizzes.show', ['quiz' => $quiz->id]) }}"
+                                class="btn btn-success float-right mr-2">
+                                All Questions
+                            </a>
                         </div>
 
                         <div class="card-body">
