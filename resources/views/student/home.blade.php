@@ -26,7 +26,7 @@
                                     <th>Start</th>
                                     <th>End</th>
                                     <th>Duration</th>
-                                    <th>Total Quastion</th>
+                                    <th>Total Question</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
